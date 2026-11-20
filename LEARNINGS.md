@@ -17,3 +17,10 @@ DAY - 01 , DATE :- 17/11/26
 | `git status` | Git | Checks your current branch and which files are staged or untracked |
 | `git add .` | Git | Stages all changed/new files in the current directory for commit |
 | `git commit -m "..."` | Git | Saves a permanent snapshot with a Conventional Commit message |
+
+
+Day-02 , Date :- 20/11/26
+- **Normalized tables & Foreign Keys:** Separated `order_items` from `orders` so one order can contain multiple products without duplicating data.
+- **Data-safety rules in SQL:** Stored money in integer `price_cents` (no float rounding bugs), used `TIMESTAMPTZ` (prevents UTC vs IST timezone bugs), and added `CHECK (stock_qty >= 0)`.
+- **Protect history (`ON DELETE RESTRICT` vs `CASCADE`):** Deleting an order cascades to `order_items`, while `RESTRICT` blocks deleting a product that has past sales.
+- **Partial unique index:** Added `WHERE is_read = FALSE` on `notifications(product_id)` so PostgreSQL blocks duplicate unread low-stock alerts automatically.
